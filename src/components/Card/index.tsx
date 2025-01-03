@@ -1,10 +1,12 @@
-import { container} from './style';
+
+import styles from './Card.module.css';
+import { CardTitle } from '../CardTitle';
 
 export const Card = () => {
-  
   return (
-    <div style={container}>
+    <div className={styles.container}>
       ...
+      <CardTitle />
     </div>
   )
 }
