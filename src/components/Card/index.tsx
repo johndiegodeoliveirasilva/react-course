@@ -1,12 +1,10 @@
 
-import styles from './Card.module.css';
-import { CardTitle } from '../CardTitle';
+import { Card } from './styles'
 
-export const Card = () => {
+export default () => {
   return (
-    <div className={styles.container}>
-      ...
-      <CardTitle />
-    </div>
+    < Card>
+    ..
+    </Card>
   )
 }
