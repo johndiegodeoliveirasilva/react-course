@@ -1,20 +1,34 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 
 const App = () => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [time, setTime] = useState(0);
+  const intervalRef = useRef(0);
 
-  const handleClick = () => {
-    const current = inputRef.current;
 
-    if (!current) return; 
+  const handleStart = () => {
+    if (intervalRef.current) handleStop();
 
-    current.focus();
+    const intervalID =  setInterval(() => {
+      setTime(t => t + 1)
+    }, 100)
+  
+    intervalRef.current = intervalID
   }
+
+
+  const handleStop = () => {
+    clearTimeout(intervalRef.current!)
+  }
+
   return (
     <div>
-      <input ref={inputRef}/>
-      <button onClick={handleClick}>Click me</button>
-     
+      <h2>{time}</h2>
+
+      <div style={{display: 'flex', gap: 20}}>
+        <button onClick={handleStart}>Start</button>
+        <button onClick={handleStop}>Stop</button>
+
+      </div>
     </div>
 
   );
