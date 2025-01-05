@@ -1,13 +1,23 @@
-import { useId } from "react";
+import { useRef } from "react";
+
 const App = () => {
-  const inputId = useId()
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleClick = () => {
+    const current = inputRef.current;
+
+    if (!current) return; 
+
+    current.focus();
+  }
   return (
     <div>
-      <label htmlFor={inputId}>Insert something cool on input</label>
-      <input placeholder="Digite something" id={inputId}/>
+      <input ref={inputRef}/>
+      <button onClick={handleClick}>Click me</button>
+     
     </div>
 
-    )
+  );
 }
 
 export default App;
