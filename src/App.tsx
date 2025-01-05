@@ -1,6 +1,12 @@
+import { useId } from "react";
 const App = () => {
+  const inputId = useId()
   return (
-    <div></div>
+    <div>
+      <label htmlFor={inputId}>Insert something cool on input</label>
+      <input placeholder="Digite something" id={inputId}/>
+    </div>
+
     )
 }
 
