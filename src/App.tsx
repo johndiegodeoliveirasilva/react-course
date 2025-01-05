@@ -1,10 +1,12 @@
+import { ThemeProvider } from 'styled-components';
 import { Input } from './components/Input'
+import theme from './theme/theme'
 const App = () => {
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Input></Input>
-    </div>
+    </ThemeProvider>
     )
   }
 
