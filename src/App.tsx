@@ -1,9 +1,9 @@
-import Card from './components/Card'
+import { Input } from './components/Input'
 const App = () => {
 
   return (
     <div>
-      <Card></Card>
+      <Input></Input>
     </div>
     )
   }
