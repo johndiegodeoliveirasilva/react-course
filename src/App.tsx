@@ -1,36 +1,46 @@
-import { useState, useRef } from "react";
+import { useReducer, useState } from "react";
+
+type TasksState = string[]
+type TasksAction = {
+  type: 'ADD_TASK',
+  payload: string
+}
+
+const reducer = (state: TasksState, action: TasksAction) => {
+  if (action.type === 'ADD_TASK' && action.payload != '') {
+    return [...state, action.payload]
+  }
+  return state
+}
 
 const App = () => {
-  const [time, setTime] = useState(0);
-  const intervalRef = useRef(0);
+  const [tasks, dispatch] = useReducer(reducer, [])
+  const [inputValue, setInputValue] = useState('')
 
-
-  const handleStart = () => {
-    if (intervalRef.current) handleStop();
-
-    const intervalID =  setInterval(() => {
-      setTime(t => t + 1)
-    }, 100)
-  
-    intervalRef.current = intervalID
-  }
-
-
-  const handleStop = () => {
-    clearTimeout(intervalRef.current!)
+  const handClick = () => {
+    dispatch({ type: 'ADD_TASK', payload: inputValue })
   }
 
   return (
     <div>
-      <h2>{time}</h2>
 
-      <div style={{display: 'flex', gap: 20}}>
-        <button onClick={handleStart}>Start</button>
-        <button onClick={handleStop}>Stop</button>
+      <input 
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)
+      }/>
 
-      </div>
+      <button onClick={handClick}>
+        New task
+      </button>
+
+      <ul>
+        { tasks.map((task, key) => (
+          <li key={key}>{task}</li>
+        ))}
+
+      </ul>
+
     </div>
-
   );
 }
 
