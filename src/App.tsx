@@ -1,21 +1,16 @@
-import { createContext, useState } from "react";
+import { ContextProvider } from "./contexts/Context";
 import { Button } from "./components/Button";
-import { Card } from "./components/Card";
-
-type ThemeContextType = {
-  theme: string,
-  setTheme: (theme: string) => void
-}
-
-export const ThemeContext = createContext<ThemeContextType>({theme: '', setTheme: () => {}})
+import { AuthCard } from "./components/AuthCard";
 
 const App = () => {
-  const [theme, setTheme] = useState('black')
   return (
-   <ThemeContext.Provider value={{theme, setTheme}}>
-      <Button />
-      <Card />
-   </ThemeContext.Provider>
+    <ContextProvider>
+      <Button/>
+
+      <div style={{border: '1px solid gray', padding: '10px 30px' }}>
+        <AuthCard/>
+      </div>
+    </ContextProvider>
   );
 }
 

@@ -1,21 +1,20 @@
 import { useContext } from "react"
-import { ThemeContext } from "../App"
+import { Context } from "../contexts/Context"
 
 export const Button = () => {
-  const { theme, setTheme}  = useContext(ThemeContext)
+  const { state, dispatch } = useContext(Context)
 
+  const handleClick = () => {
+    if (state.theme.theme === 'light') {
+      dispatch({ type: 'CHANGE_THEME', payload: 'dark' })
+    } else {
+      dispatch({ type: 'CHANGE_THEME', payload: 'light' })
+    }
+  }
   return (
     <div>
-      <div>
-        My theme is: {theme}
-      </div>
-      {theme == 'black' ?
-        <button onClick={() => setTheme('white')}>Change to write</button> :
-        <button onClick={() => setTheme('black')}>Change to dark</button>
-      }
-
-      
-      
+      <h2 style={{background: state.theme.theme == 'light' ? 'white' : 'black', color: 'red'}}>O tema é: {state.theme.theme}</h2>
+      <button onClick={handleClick}>Mudar tema</button>
     </div>
   )
 }
